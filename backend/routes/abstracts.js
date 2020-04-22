@@ -9,7 +9,8 @@ router.route('/').get((req, res) => {
 
 router.route('/first/').get((req, res) => {
     Abstract.findOne({
-        estado: false
+        tipo: "",
+        corriente: ""
      })
      .then(abstract => res.json(abstract))
     .catch(err => res.status(400).json('Error: ' + err));
@@ -17,16 +18,16 @@ router.route('/first/').get((req, res) => {
 
 router.route('/add').post((req, res) => {
     const input_url = req.body.input_url;
+    const titulo = req.body.titulo;
     const texto = req.body.texto;
-    const tipo = req.body.tipo;
-    const corriente = req.body.corriente;
-    const estado = req.body.estado;
+    const tipo = "";
+    const corriente = "";
     const newAbstract = new Abstract({
         input_url,
+        titulo,        
         texto,
         tipo,
-        corriente,
-        estado
+        corriente
     });
     newAbstract.save()
     .then(() => res.json('Abstract added!'))
@@ -49,10 +50,10 @@ router.route('/update/:id').post((req, res) => {
 Abstract.findById(req.params.id)
     .then(abstract => {
     abstract.input_url = req.body.input_url;
+    abstract.titulo = req.body.titulo;
     abstract.texto = req.body.texto;
     abstract.tipo = req.body.tipo;
     abstract.corriente = req.body.corriente;
-    abstract.estado = req.body.estado;
     abstract.save()
         .then(() => res.json('Abstract updated!'))
         .catch(err => res.status(400).json('Error: ' + err));
@@ -65,7 +66,6 @@ router.route('/anotar/:id').post((req, res) => {
         .then(abstract => {
         abstract.tipo = req.body.tipo;
         abstract.corriente = req.body.corriente;
-        abstract.estado = true;
         abstract.save()
             .then(() => res.json('Abstract anotated!'))
             .catch(err => res.status(400).json('Error: ' + err));
@@ -73,13 +73,11 @@ router.route('/anotar/:id').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-
 router.route('/desanotar/:id').get((req, res) => {
     Abstract.findById(req.params.id)
         .then(abstract => {
         abstract.tipo = "";
         abstract.corriente = "";
-        abstract.estado = false;
         abstract.save()
             .then(() => res.json('Abstract desanotated!'))
             .catch(err => res.status(400).json('Error: ' + err));

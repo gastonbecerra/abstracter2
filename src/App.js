@@ -8,6 +8,7 @@ import EditAbstracts from "./components/edit-abstracts.component";
 import CreateAbstracts from "./components/create-abstracts.component";
 import FirstAbstract from "./components/first-abstract.component";
 import DesanotarAbstracts from "./components/desanotar-abstract.component";
+import AnotarAbstracts from "./components/anotar-abstract.component";
 import DeleteAbstracts from "./components/delete-abstracts.components";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <br />
       <Route path="/" exact component={AbstractsList} />
       <Route path="/edit/:id" exact component={EditAbstracts} />
+      <Route path="/anotar/:id" exact component={AnotarAbstracts} />
       <Route path="/desanotar/:id" exact component={DesanotarAbstracts} />
       <Route path="/create" exact component={CreateAbstracts} />
       <Route path="/first" exact component={FirstAbstract} />

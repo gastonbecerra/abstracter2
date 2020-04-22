@@ -9,8 +9,7 @@ export default class EditAbstracts extends Component {
         this.onChangeInput = this.onChangeInput.bind(this);
         this.onChangeTexto = this.onChangeTexto.bind(this);
         this.onChangeTipo = this.onChangeTipo.bind(this);
-        this.onChangeMetodo = this.onChangeMetodo.bind(this);
-        this.onChangeFuente = this.onChangeFuente.bind(this);
+        this.onChangeCorriente = this.onChangeCorriente.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
@@ -18,9 +17,7 @@ export default class EditAbstracts extends Component {
             input_url: "",
             texto: "",
             tipo: "",
-            metodo: "",
-            fuente: "",
-            corriente: "",
+            corriente: ""
         }
     }
 
@@ -31,8 +28,7 @@ export default class EditAbstracts extends Component {
           input_url: response.data.input_url,
           texto: response.data.texto,
           tipo: response.data.tipo,
-          metodo: response.data.metodo,
-          fuente: response.data.fuente
+          corriente: response.data.corriente,
         })   
       })
       .catch(function (error) {
@@ -52,12 +48,8 @@ export default class EditAbstracts extends Component {
         this.setState({ tipo: e.target.value })
     }
 
-    onChangeMetodo(e) {
-        this.setState({ metodo: e.target.value })
-    }
-
-    onChangeFuente(e) {
-        this.setState({ fuente: e.target.value })
+    onChangeCorriente(e) {
+        this.setState({ corriente: e.target.value })
     }
 
     onSubmit(e) {
@@ -66,8 +58,7 @@ export default class EditAbstracts extends Component {
             input_url: this.state.input_url,
             texto: this.state.texto,
             tipo: this.state.tipo,
-            metodo: this.state.metodo,
-            fuente: this.state.fuente
+            corriente: this.state.corriente
         }
 
         console.log(abstract);
@@ -107,21 +98,14 @@ export default class EditAbstracts extends Component {
                 </div>
 
                 <div className="form-group"> 
-                    <label>metodo: </label>
+                    <label>corriente: </label>
                     <input  type="text" className="form-control"
-                    value={this.state.metodo}
-                    onChange={this.onChangeMetodo} />
-                </div>
-
-                <div className="form-group"> 
-                    <label>fuentes: </label>
-                    <input  type="text" className="form-control"
-                    value={this.state.fuente}
-                    onChange={this.onChangeFuente} />
+                    value={this.state.corriente}
+                    onChange={this.onChangeCorriente} />
                 </div>
 
               <div className="form-group">
-                <input type="submit" value="Create Abstract" className="btn btn-primary" />
+                <input type="submit" value="Dale fiesta" className="btn btn-primary" />
               </div>
             </form>
           </div>
