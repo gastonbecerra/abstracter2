@@ -9,11 +9,12 @@ router.route('/').get((req, res) => {
 
 router.route('/first/').get((req, res) => {
     Abstract.findOne({
-        tipo: "",
-        corriente: ""
+        "tipo" : { "$exists" : false } 
      })
      .then(abstract => res.json(abstract))
     .catch(err => res.status(400).json('Error: ' + err));
+
+    // "corriente" : { "$exists" : false } 
 });
 
 router.route('/add').post((req, res) => {

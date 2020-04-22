@@ -25,8 +25,9 @@ export default class EditAbstracts extends Component {
       axios.get('http://localhost:5000/abstracts/'+this.props.match.params.id)
       .then(response => {
         this.setState({
+          id: response.data.data._id,
           input_url: response.data.input_url,
-          texto: response.data.texto,
+          texto: response.data.text,
           tipo: response.data.tipo,
           corriente: response.data.corriente,
         })   
@@ -75,6 +76,10 @@ export default class EditAbstracts extends Component {
             <h3>Create Abstract</h3>
 
             <form onSubmit={this.onSubmit}>
+
+                <p><strong>id:</strong>{this.state.id}</p>
+                <p><strong>url:</strong> <a href="{this.state.input_url}">{this.state.input_url}</a></p>
+                <p><strong>text:</strong> {this.state.texto}</p>
 
                 <div className="form-group"> 
                     <label>input_url: </label>

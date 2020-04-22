@@ -4,7 +4,7 @@ import Axios from 'axios';
 import Button from 'react-bootstrap/Button'
 
 function anotar(tipo,corriente,id) { 
-  if (tipo !== "" && corriente !== "") {
+  if ( (tipo !== undefined ) && (tipo !== "" ) ) {
     return  <Link to={"/desanotar/"+id}><Button variant="outline-danger" > desanotar </Button></Link>;
   } else {
     return  <Link to={"/anotar/"+id}><Button variant="outline-success" > anotar </Button></Link>;
@@ -25,16 +25,11 @@ const Abstract = props => (
   <tr>
     <td>
       {titulo_corto(props.abstract.titulo)} <br/> 
-      <a href="{props.abstract.input_url}">{props.abstract.input_url}</a>
+      <a href="{props.abstract.input_url}">{props.abstract.input_url}</a> <br />
     </td>
-    {/*
-    <td>{props.abstract.tipo}</td>
-    <td>{props.abstract.corriente}</td>
-    */}
     <td>{anotar(props.abstract.tipo, props.abstract.corriente, props.abstract._id)}</td>
-    <td>
-      <Link to={"/edit/"+props.abstract._id}> editar </Link> |
-      <Link to={"/delete/"+props.abstract._id}> <i>borrar</i> </Link>
+    <td>{props.abstract.tipo} <br /> {props.abstract.corriente}</td>
+    <td><Link to={"/delete/"+props.abstract._id}><i>borrar</i></Link>
     </td>
   </tr>
 )
@@ -69,9 +64,7 @@ export default class AbstractsList extends Component {
     <div>
       <h3>Abstracts psico social</h3>
       <div>
-        <p>El laburo consiste en anotar los siguiente abstracts, con 2 campos:</p>
-        <p>** El campo <b>tipo</b> se toma de Leon & Montero (2002) = http://www.aepc.es/ijchp/articulos_pdf/ijchp-53.pdf</p>
-        <p>** El campo <b>corriente</b> es abierto</p>
+        <p>El laburo consiste en anotar los siguiente abstracts, con 2 campos: el <b>tipo</b>, siguiendo <a href="http://www.aepc.es/ijchp/articulos_pdf/ijchp-53.pdf">Leon & Montero (2002)</a>, y las <b>corrientes</b>, que es un campo abierto.</p>
       </div>
       <table className="table">
         <thead className="thead-light">
@@ -81,7 +74,7 @@ export default class AbstractsList extends Component {
             <th>tipo</th>
             <th>corriente</th>
             */}
-            <th>anotado?</th>
+            <th colSpan="2">anotado?</th>
             <th>operaciones</th>
           </tr>
         </thead>
