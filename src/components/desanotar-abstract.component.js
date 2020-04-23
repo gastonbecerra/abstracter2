@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+axios.defaults.baseURL = 'https://abstracter2.herokuapp.com/abstracts';
 
 export default class DesanotarAbstracts extends Component {
 
@@ -9,7 +10,7 @@ export default class DesanotarAbstracts extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/abstracts/desanotar/'+this.props.match.params.id)
+        axios.get('/desanotar/'+this.props.match.params.id)
             .then(res => console.log(res.data))
             .catch(function (error) { console.log(error) })
         window.location = '/';

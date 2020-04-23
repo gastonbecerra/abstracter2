@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Axios from 'axios';
+import axios from 'axios';
 import Button from 'react-bootstrap/Button'
-Axios.defaults.baseURL = 'https://abstracter2.herokuapp.com/abstracts';
+axios.defaults.baseURL = 'https://abstracter2.herokuapp.com/abstracts';
 
 function anotar(tipo,corriente,id) { 
   if ( (tipo !== undefined ) && (tipo !== "" ) ) {
@@ -28,11 +28,25 @@ const Abstract = props => (
       {titulo_corto(props.abstract.titulo)} <br/> 
       <a href="{props.abstract.input_url}">{props.abstract.input_url}</a> <br />
     </td>
-    <td>{anotar(props.abstract.tipo, props.abstract.corriente, props.abstract._id)}</td>
+    <td>{anotar(props.abstract.tipo, props.abstract.corriente, props.abstract._id)} </td>
     <td>{props.abstract.tipo} <br /> {props.abstract.corriente}</td>
     <td><Link to={"/delete/"+props.abstract._id}><i>borrar</i></Link>
     </td>
   </tr>
+)
+
+const Abstract2 = props => (
+  <div>
+    <div>
+        {titulo_corto(props.abstract.titulo)} <br/> 
+        <a href="{props.abstract.input_url}">{props.abstract.input_url}</a>
+    </div>
+    <div>
+      {props.abstract.tipo} {props.abstract.corriente} 
+      {anotar(props.abstract.tipo, props.abstract.corriente, props.abstract._id)} 
+    </div>
+    <hr></hr>
+  </div>
 )
 
 export default class AbstractsList extends Component {
@@ -41,24 +55,31 @@ export default class AbstractsList extends Component {
     super(props);
     this.state = {abstracts: []}
     this.state.total = 0
+    this.state.next = 0
   }
 
   componentDidMount() {
-    Axios.get('/')
+    axios.get('/')
       .then(response => {
         this.setState({ abstracts: response.data })
       })
       .catch((error)=>{
         console.log(error); 
       })
-      Axios.get('/count')
+    axios.get('/count')
       .then(response => {
         this.setState({ total: response.data })
       })
       .catch((error)=>{
         console.log(error); 
       })
-
+    axios.get('/next')
+      .then(response => {
+        this.setState({ next: response.data })
+      })
+      .catch((error)=>{
+        console.log(error); 
+      })
   }
 
   abstractsList() {
@@ -69,31 +90,26 @@ export default class AbstractsList extends Component {
     })
   }
 
+  abstractsList2() {
+    return this.state.abstracts.map(currentabstract => {
+      return <Abstract2 
+        abstract={currentabstract} 
+        key={currentabstract._id}/>;
+    })
+  }
+
   render() {
     return (
+
     <div>
-      <h3>Abstracts psico social</h3>
-      <h4>Quedan {this.state.total} <Link to={"/first/"}><Button variant="primary" > Anotar abstract </Button></Link></h4>
+      <h4>Quedan {this.state.total} <Link to={"/anotar/" + this.state.next}><Button variant="primary" > Anotar siguiente </Button> </Link></h4>
       <div>
         <p>El laburo consiste en anotar los siguiente abstracts, con 2 campos: el <b>tipo</b>, siguiendo <a href="http://www.aepc.es/ijchp/articulos_pdf/ijchp-53.pdf">Leon & Montero (2002)</a>, y las <b>corrientes</b>, que es un campo abierto.</p>
       </div>
-      <table className="table">
-        <thead className="thead-light">
-          <tr>
-            <th>titulo</th>
-            {/*
-            <th>tipo</th>
-            <th>corriente</th>
-            */}
-            <th colSpan="2">anotado?</th>
-            <th>operaciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          { this.abstractsList() }
-        </tbody>
-      </table>
-    </div>    
+      <div>
+      { this.abstractsList2() }
+      </div>
+      </div>    
     )
   }
 }
