@@ -7,6 +7,24 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/count').get((req, res) => {
+    /*
+    Abstract.countDocuments({
+        "tipo" : { "$exists" : false } 
+     })
+     .then(abstract => res.json(abstract.countDocuments()))
+    .catch(err => res.status(400).json('Error: ' + err));
+     */
+
+    Abstract.countDocuments({
+        "tipo" : { "$exists" : false } 
+        }, function (err, count) {
+        res.json(count);
+      });
+
+    // "corriente" : { "$exists" : false } 
+});
+
 router.route('/first/').get((req, res) => {
     Abstract.findOne({
         "tipo" : { "$exists" : false } 

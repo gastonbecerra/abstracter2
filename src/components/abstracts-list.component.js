@@ -39,6 +39,7 @@ export default class AbstractsList extends Component {
   constructor(props) {
     super(props);
     this.state = {abstracts: []}
+    this.state.total = 0
   }
 
   componentDidMount() {
@@ -49,6 +50,14 @@ export default class AbstractsList extends Component {
       .catch((error)=>{
         console.log(error); 
       })
+      Axios.get('http://localhost:5000/abstracts/count')
+      .then(response => {
+        this.setState({ total: response.data })
+      })
+      .catch((error)=>{
+        console.log(error); 
+      })
+
   }
 
   abstractsList() {
@@ -63,6 +72,7 @@ export default class AbstractsList extends Component {
     return (
     <div>
       <h3>Abstracts psico social</h3>
+      <h4>Quedan {this.state.total} <Link to={"/first/"}><Button variant="primary" > Anotar abstract </Button></Link></h4>
       <div>
         <p>El laburo consiste en anotar los siguiente abstracts, con 2 campos: el <b>tipo</b>, siguiendo <a href="http://www.aepc.es/ijchp/articulos_pdf/ijchp-53.pdf">Leon & Montero (2002)</a>, y las <b>corrientes</b>, que es un campo abierto.</p>
       </div>

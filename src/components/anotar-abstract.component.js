@@ -64,7 +64,6 @@ export default class AnotarAbstracts extends Component {
         return (
             <div>
             <h3>Clasificar Abstract</h3>
-
             <h4>{this.state.titulo}</h4>
 
             <p><strong>id:</strong>{this.state.id}</p>
@@ -80,6 +79,8 @@ export default class AnotarAbstracts extends Component {
                   <label><input type="radio" onChange={this.onChangeTipo} value="cualitativo" name="tipo"/> Cualitativo </label><br />  
                   <label><input type="radio" onChange={this.onChangeTipo} value="expost" name="tipo"/> Ex post facto </label><br />  
                   <label><input type="radio" onChange={this.onChangeTipo} value="experimental" name="tipo"/> Experimental o cuasi </label><br />  
+                  <label><input type="radio" onChange={this.onChangeTipo} value="editorial" name="tipo"/> ++ Editorial / Anuncios </label><br />  
+                  <label><input type="radio" onChange={this.onChangeTipo} value="bibliometricos" name="tipo"/> ++ Bibliometricos </label><br />  
                 </div>
 
                 <div className="form-group"> 
