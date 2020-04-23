@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+axios.defaults.baseURL = 'https://abstracter2.herokuapp.com/abstracts';
 
 export default class EditAbstracts extends Component {
 
@@ -16,7 +17,7 @@ export default class EditAbstracts extends Component {
     }
 
     componentDidMount() {
-      axios.get('http://localhost:5000/abstracts/first')
+      axios.get('/first')
       .then(response => {
         this.setState({
           id: response.data._id,

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+axios.defaults.baseURL = 'https://abstracter2.herokuapp.com/abstracts';
 
 export default class EditAbstracts extends Component {
 
@@ -22,7 +23,7 @@ export default class EditAbstracts extends Component {
     }
 
     componentDidMount() {
-      axios.get('http://localhost:5000/abstracts/'+this.props.match.params.id)
+      axios.get('/'+this.props.match.params.id)
       .then(response => {
         this.setState({
           id: response.data.data._id,
@@ -64,7 +65,7 @@ export default class EditAbstracts extends Component {
 
         console.log(abstract);
 
-        axios.post('http://localhost:5000/abstracts/update/'+this.props.match.params.id, abstract)
+        axios.post('/'+this.props.match.params.id, abstract)
             .then(res => console.log(res.data));
 
         window.location = '/';

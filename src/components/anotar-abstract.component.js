@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+axios.defaults.baseURL = 'https://abstracter2.herokuapp.com/abstracts';
 
 export default class AnotarAbstracts extends Component {
 
@@ -23,7 +24,7 @@ export default class AnotarAbstracts extends Component {
     }
     
     componentDidMount() {
-        axios.get('http://localhost:5000/abstracts/'+this.props.match.params.id)
+        axios.get('/'+this.props.match.params.id)
         .then(response => {
           this.setState({
             id: response.data._id,
@@ -54,7 +55,7 @@ export default class AnotarAbstracts extends Component {
             corriente: this.state.corriente
         }
 
-        axios.post('http://localhost:5000/abstracts/anotar/' + this.state.id, abstract)
+        axios.post('/anotar/' + this.state.id, abstract)
             .then(res => console.log(res.data));
 
         window.location = '/';

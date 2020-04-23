@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import Button from 'react-bootstrap/Button'
+Axios.defaults.baseURL = 'https://abstracter2.herokuapp.com/abstracts';
 
 function anotar(tipo,corriente,id) { 
   if ( (tipo !== undefined ) && (tipo !== "" ) ) {
@@ -43,14 +44,14 @@ export default class AbstractsList extends Component {
   }
 
   componentDidMount() {
-    Axios.get('http://localhost:5000/abstracts')
+    Axios.get('/')
       .then(response => {
         this.setState({ abstracts: response.data })
       })
       .catch((error)=>{
         console.log(error); 
       })
-      Axios.get('http://localhost:5000/abstracts/count')
+      Axios.get('/count')
       .then(response => {
         this.setState({ total: response.data })
       })
