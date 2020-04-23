@@ -28,7 +28,7 @@ export default class EditAbstracts extends Component {
           corriente: response.data.corriente
         })   
         console.log('por dirigirte a'+response.data._id);
-        window.location = '/anotar/'+response.data._id;
+        // window.location = '/anotar/'+response.data._id;
       })
       .catch(function (error) {
         console.log(error)
