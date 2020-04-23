@@ -20,6 +20,7 @@ export default class EditAbstracts extends Component {
     componentDidMount() {
       axios.get('/first')
       .then(response => {
+        /*
         this.setState({
           id: response.data._id,
           input_url: response.data.input_url,
@@ -27,6 +28,7 @@ export default class EditAbstracts extends Component {
           tipo: response.data.tipo,
           corriente: response.data.corriente
         })   
+        */
         window.location = '/anotar/'+response.data._id;
       })
       .catch(function (error) {
