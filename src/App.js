@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import Navbar from "./components/navbar.component"
+
 import AbstractsList from "./components/abstracts-list.component";
 import EditAbstracts from "./components/edit-abstracts.component";
 import CreateAbstracts from "./components/create-abstracts.component";
@@ -14,6 +16,8 @@ function App() {
   return (
 
     <Router>
+      <Navbar />
+      <br />
       <Route path="/" exact component={AbstractsList} />
       <Route path="/edit/:id" exact component={EditAbstracts} />
       <Route path="/anotar/:id" exact component={AnotarAbstracts} />

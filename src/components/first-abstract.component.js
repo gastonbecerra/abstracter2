@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 axios.defaults.baseURL = 'https://abstracter2.herokuapp.com/abstracts';
 
@@ -26,7 +27,7 @@ export default class EditAbstracts extends Component {
           tipo: response.data.tipo,
           corriente: response.data.corriente
         })   
-        window.location = './anotar/'+this.state.id;
+        window.location = '/anotar/'+this.state.id;
       })
       .catch(function (error) {
         console.log(error)
@@ -37,6 +38,7 @@ export default class EditAbstracts extends Component {
         return (
           <div>
           encontramos {this.state.id}
+          redirigiendo a <Link to={"/anotar/"+this.state.id}> pagina anotacion </Link>
           </div>
         )
     }
