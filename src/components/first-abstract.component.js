@@ -27,7 +27,7 @@ export default class EditAbstracts extends Component {
           tipo: response.data.tipo,
           corriente: response.data.corriente
         })   
-        window.location = '/anotar/'+this.state.id;
+        // window.location = '/anotar/'+this.state.id;
       })
       .catch(function (error) {
         console.log(error)
